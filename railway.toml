@@ -1,0 +1,13 @@
+[build]
+builder = "nixpacks"
+buildCommand = "npm ci --prefix frontend && npm run build --prefix frontend && npm ci --prefix backend --omit=dev"
+
+[deploy]
+startCommand = "npm start --prefix backend"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[[services]]
+name = "smartstock-api"
